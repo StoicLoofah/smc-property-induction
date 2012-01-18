@@ -1,0 +1,87 @@
+body{
+    text-align:center;
+}
+
+#content{
+    text-align:left;
+    width:600px;
+    margin:auto;
+
+}
+
+.panel{
+    display:none;
+}
+
+.text{
+    margin:20px 0 0;
+}
+
+.reminder{
+    font-size:12px;
+    color:gray;
+}
+
+.premise{
+    margin:40px 0 0;
+    font-size:18px;
+}
+
+.conclusion{
+    margin:70px 0 0;
+    font-size:18px;
+}
+
+.next{
+
+}
+
+.ratings{
+    margin:0 auto;
+}
+
+table.ratings th label{
+    margin:0 0 0 4px;
+}
+
+.progress{
+    float:right;
+}
+
+.progress span{
+    position:relative;
+    top: -6px;
+}
+
+.bar-wrapper{
+    height:20px;
+    width:200px;
+    border:1px solid #000000;
+    display:inline-block;
+}
+
+.bar{
+    position:relative;
+    height:100%;
+    width:0px;
+    background-color:#000000
+}
+
+.question{
+    margin:10px 0;
+}
+
+.question ul{
+    list-style:none;
+    padding:0;
+    line-height:20px;
+    margin:0;
+}
+
+.question input{
+    margin:0 10px 0 5px;
+}
+
+.question textarea{
+    margin:5px 0;
+}

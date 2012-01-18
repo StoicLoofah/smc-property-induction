@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <title>Experiment</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    
+  </head>
+  <body>
+    <form id="turkdata" name="turkdata" action="http://www.mturk.com/mturk/externalSubmit" type="get">
+      <input type="hidden" name="assignmentId" id="assignmentId" value="-1"/>
+      <input type="hidden" name="hitId" id="hitId" value="-1" />
+      <input type="hidden" name="subjectId" id="subjectId" class="subjectId" value="-1" />
+      <input type="hidden" name="workerId" id="workerId" value="-1" />
+      <input type="hidden" name="catchPassed" id="catchPassed" value="1" />
+      <input type="hidden" name="finalTrial" id="finalTrial" value="-1" />
+    </form>
+    <div id="content">
+      <!--<p class="debug" style="border:1px #ffffff solid;"></p>-->
+      <div class="progress">
+	<span>Progress:</span>
+	<div class="bar-wrapper">
+	  <div class="bar"></div>
+	</div>
+      </div>
+      <div style="clear:both;"></div>
+      <div class="panel" panel="intro">
+	<p class="text">We are interested in how people evaluate arguments. On the following pages, you will see several arguments. On each page, press spacebar to continue. These arguments will be followed with a conclusion. Indicate how much you agree with the statement on the scale below it. Note that you cannot go backwards to re-read arguments or revise ratings. These are subjective judgments; there are no right or wrong answers. This will be followed by a short survey.</p>
+	<p>Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact Noah Goodman at ngoodman@stanford.edu. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+	<p>Please email me at <a href="mailto:kkleung@stanford.edu">kkleung@stanford.edu</a> if you have any questions or concerns about this study.</p>
+	<p>Press spacebar to continue.</p>
+      </div>
+      <div class="panel" panel="premise">
+	<p class="reminder">Read the following information. Press spacebar to continue</p>
+	<p class="premise"></p>
+      </div>
+      <div class="panel" panel="conclusion">
+	<p class="conclusion"></p>
+	<p>Indicate how much you agree with this statement using the scale below.</p>
+	<table class="ratings">
+	  <tr>
+	    <th><label for="v1">1</label></th>
+	    <th><label for="v2">2</label></th>
+	    <th><label for="v3">3</label></th>
+	    <th><label for="v4">4</label></th>
+	    <th><label for="v5">5</label></th>
+	    <th><label for="v6">6</label></th>
+	    <th><label for="v7">7</label></th>
+	    <th><label for="v8">8</label></th>
+	    <th><label for="v9">9</label></th>
+	  </tr>
+	  <tr>
+	    <td><input class="rating" name="rating" type="radio" id="v1" value="1" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v2" value="2" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v3" value="3" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v4" value="4" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v5" value="5" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v6" value="6" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v7" value="7" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v8" value="8" /></td>
+	    <td><input class="rating" name="rating" type="radio" id="v9" value="9" /></td>
+	  </tr>
+	  <tr>
+	    <td colspan="4">Disagree</td>
+	    <td colspan="6" style="text-align:right">Agree</td>
+	</table>
+	<p class="message" style="color:red;"></p>
+      </div>
+      <div class="panel" panel="survey">
+	<div id="surveyform">
+	  <input type="hidden" name="action" value="survey" />
+	  <input type="hidden" name="subjectId" class="subjectId" value="-1" />
+	  <div class="question">
+	    <ul>
+	      <li>How old are you?</li>
+	      <li><label><input class="age" name="age" type="radio" value="1" />0-18</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="2" />19-30</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="3" />31-40</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="4" />41-50</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="5" />51-60</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="6" />Over 60</label></li>
+	      <li><label><input class="age" name="age" type="radio" value="-1" />Decline to answer</label></li>
+	    </ul>
+	  </div>
+	  <div class="question">
+	    <ul>
+	      <li>What is your sex?</li>
+	      <li><label><input class="sex" name="sex" type="radio" value="M" />Male</label></li>
+	      <li><label><input class="sex" name="sex" type="radio" value="F" />Female</label></li>
+	      <li><label><input class="sex" name="sex" type="radio" value="O" />Other</label></li>
+	      <li><label><input class="sex" name="sex" type="radio" value="N" />Decline to answer</label></li>
+	    </ul>
+	  </div>
+	  <div class="question"> Can you explain in a sentence or two how you were performing this task? <br />
+	    <textarea name="explanation" class="explanation" rows="2" cols="60"></textarea>
+	  </div>
+	  <div class="question"> Do you have any other comments on the study? <br />
+	    <textarea name="comments" class="comments" rows="2" cols="60"></textarea>
+	  </div>
+	  <div>
+	    <p class="message" style="color:red;"></p>
+	    <input type="button" class="surveydone" value="Continue" />
+	  </div>
+	</div>
+      </div>
+      <div class="panel" panel="thankyou">
+	<p>Thanks for participating!</p>
+	<input type="button" onClick="if(!debug)$('#turkdata').submit();else{alert('Debug done');}" value="Done" />
+      </div>
+    </div>
+    <script type="text/javascript" src="experiment.js"></script>
+  </body>
+</html>
+
+

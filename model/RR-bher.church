@@ -1,0 +1,75 @@
+;(load "../files/thePopesToys/RR/Nosofsky1994.church")
+
+;;;the RR model
+(define tau 0.3)
+(define noise-param (exp -1.5))
+
+(define (get-formula)
+  (if (flip tau)
+      (let ((c (Conj))
+            (f (get-formula)))
+        (lambda (x) (or (c x) (f x))))
+      (Conj)))
+
+(define (Conj)
+  (if (flip tau)
+      (let ((c (Conj))
+            (p (Pred)))
+        (lambda (x) (and (c x) (p x))))
+      (Pred)))
+
+(define (Pred)
+  (let ((index (sample-integer num-features))
+        (value (sample-integer 2)))
+    (lambda (x) (= (list-ref x index) value))))
+
+(define (noisy-equal? a b) (flip (if (equal? a b) 0.999999999 noise-param)))
+
+;;;the psmc query
+(define num-samples 500)
+(define (get-samples evidence)
+  (psmc-query (time) (map list (iota (+ 1 (length evidence)))) ;;temp var and schedule (in this case amount of evidence to include).
+              num-samples ;;popsize
+              2  ;;mcmc iterations per time
+
+;(mh-query num-samples 10
+;          (define time (length evidence))
+  
+              (define my-formula (get-formula))
+              
+              (map my-formula transfer-set-fordered);test-objs)
+              
+              (all (map
+                    (lambda (ex) (noisy-equal? (first ex) (my-formula (rest ex))))
+                    (take evidence time)))))
+
+
+(define (means samples)
+  (map (lambda (x) (/ x num-samples)) 
+       (fold (lambda (x y) (map (lambda (x y) (+ (if x 1.0 0.0) y)) x y)) 
+             (make-list (length (first samples)) 0) 
+             samples)))
+
+(define (err a b) (map (lambda (a b) (abs (- a b))) a b))
+
+
+(define blocks 5)
+;(define evidence
+  ;;(random-order-training blocks))
+;  (f0-order-training blocks))
+
+(define f0 (get-samples (f0-order-training blocks)))
+(define f2 (get-samples (f2-order-training blocks)))
+;(define ra (get-samples (random-order-training blocks)))
+
+(display "f0-order:\n")
+(display (means f0))
+(display "\nf2-order:\n")
+(display (means f2))
+
+;; (define e
+;;  (err (means (get-samples evidence)) human-data))
+
+;; (display e)
+;; (display "\n")
+;; (display (mean e))

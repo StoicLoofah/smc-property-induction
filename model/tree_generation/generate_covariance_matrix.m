@@ -1,0 +1,35 @@
+load('myanimalsresults.mat');
+bestStructure = structure{6,21};
+S = bestStructure.Wsym; %already weighted as inverse of length
+
+% KempTenenbaum09 Appendix B
+%S = [0 0 0 1; 0 0 0 1; 0 0 0 1; 1 1 1 0]; %test matrix
+%S= [0 1 1 .5 0 0 0 0; 1 0 0 0 1 .5 0 0; 1 0 0 0 0 0 .33 .5; .5 0 0 0 0 0 0 0; 0 1 0 0 0 0 0 0; 0 .5 0 0 0 0 0 0; 0 0 .33 0 0 0 0 0; 0 0 .5 0 0 0 0 0 ];
+G = diag(sum(S,2));
+delta = G - S;
+sigma = 5; % not sure what this is supposed to be
+K = inv(delta + eye(size(S)) / sigma^2); %(26)
+
+% http://en.wikipedia.org/wiki/Multivariate_normal_distribution#Drawing_values_from_the_distribution
+A = chol(K); %Not positive definite
+%[U lambda] = eig(K);
+% K == U * lambda * U'
+%A = U * lambda ^ .5;
+
+fid = fopen('data.church', 'w');
+fprintf(fid, '(define A ''(\n');
+for i = 1:size(A, 1)
+    fprintf(fid, '(');
+    fprintf(fid, '%f ', A(i, :));
+    fprintf(fid, ')\n');
+end
+fprintf(fid, '))\n\n');
+
+fprintf(fid, '(define names ''(');
+allNames = names{21};
+for i =1:size(allNames,1)
+    fprintf(fid, '"%s" ', allNames{i});
+end
+fprintf(fid, '))\n\n');
+
+fclose(fid);

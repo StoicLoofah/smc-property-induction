@@ -1,0 +1,13 @@
+This project was done with Noah Goodman of the CoCo lab.
+
+We were hoping to find order effects in property induction tasks and model those using sequential Monte Carlo methods. Unfortunately, the results didn't pan out (we didn't find significant differences in the experimental data), but the codebase to make this work is largely intact, and the method is sound. I'm somewhat proud of the list of languages/tools necessary to make this work. It includes
+
+python - generate stimuli
+html/javascript/jquery - designing experiment
+mturk/bash - running the experiment
+php/mysql - db to store data from the experiment
+python - processing data
+scheme/church - model
+MATLAB - generate covariance matrix
+
+This code should largely work as is. For generating the tree, use the code located at http://www.psy.cmu.edu/~ckemp/code/structstatmodels.html
